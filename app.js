@@ -7,6 +7,7 @@ app.use(parser.json());
 
 //routes imports
 const todoRoutes = require('./routes/todo.routes');
+const todoListRoutes = require('./routes/todoList.routes');
 
 //middleware
 app.use((req, res, next) => {
@@ -21,10 +22,10 @@ app.use((req, res, next) => {
 });
 app.use(parser.urlencoded({extended:true}));
 
-
-
 //routes
 app.use('/todos', todoRoutes);
+app.use('/list', todoListRoutes);
+
 app.use((req, res, next) => {
     const error = new Error("Not Found");
     error.status = 404;
