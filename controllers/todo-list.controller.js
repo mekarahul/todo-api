@@ -44,3 +44,15 @@ exports.delete = (req, res) => {
         })
     }
 }
+exports.findByTitle = (req, res) =>{
+    let title = req.query.title;
+    if(title != null && title != undefined){
+        todoList.FindByTitle(title, (err, data) =>{
+            if(err){
+                res.send(500)
+            }else{
+                res.send(data);
+            }
+        })
+    }
+}

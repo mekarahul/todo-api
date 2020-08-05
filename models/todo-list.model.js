@@ -40,14 +40,29 @@ todoList.Delete = (listId, result) => {
         if (err) {
             result(err, err);
         } else {
-            let deleteTodoSql = 'DELETE FROM `todos` WHERE `todos`.`listId` = ' + listId;            
+            let deleteTodoSql = 'DELETE FROM `todos` WHERE `todos`.`listId` = ' + listId;
             db.query(deleteTodoSql, (err, data) => {
                 if (err) {
                     result(err, err);
                 } else {
                     result(null, { deleted: data });
                 }
-            });            
+            });
+        }
+    });
+}
+todoList.FindByTitle = (title, result) => {
+    let titleSql = 'SELECT count(*) as numRecords FROM todo_list WHERE title ='+`'${title}'`;
+    db.query(titleSql, (err,data)=>{
+        if(err){
+            result(err, err)
+        }else{
+            if(data[0].numRecords > 0){
+                result(null, true);
+            }else{
+                result(null, false);
+            }
+            
         }
     });
 }

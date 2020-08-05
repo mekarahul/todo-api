@@ -27,6 +27,16 @@ exports.save = (req, res) => {
     }
 }
 
+exports.update = (req, res) => {
+    let todoId = req.query.id;
+    let listId = req.query.listId;
+    if(todoId != "" && listId != "" && todoId != null && listId != null){
+        todo.Update(todoId, listId, (err, data)=>{
+            res.send(data)
+        })
+    }
+}
+
 exports.delete = (req, res) => {
     let todoToUpdate = req.params.id;
     if(todoToUpdate != null && todoToUpdate != undefined){

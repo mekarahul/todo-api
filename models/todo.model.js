@@ -37,6 +37,18 @@ todo.Save = (todo, result) => {
         }
     });
 }
+
+todo.Update = (todoId,listId, result) => {
+    let updateTodoSql = 'UPDATE todos SET listId = ? WHERE todos.id = ?';
+    db.query(updateTodoSql, [listId, todoId],(err, data) => {
+        if(err){
+            result(err, err);
+        }else{
+            result(null, data);
+        }
+    });
+}
+
 todo.Delete = (todo, result) => {
     let deleteTodoSql = 'DELETE FROM `todos` WHERE `todos`.`id` = '+todo;
     console.log(deleteTodoSql);
